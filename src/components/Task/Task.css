@@ -20,10 +20,15 @@
 }
 .task__title {
   font-size: 22px;
+  word-wrap: break-word;
+  font-size: 20px;
   font-weight: 500;
 }
 .task__content {
   font-size: 15px;
+  margin-top: 10px;
+  word-wrap: break-word;
+  font-size: 14px;
   font-weight: 300;
 }
 .task__status {
