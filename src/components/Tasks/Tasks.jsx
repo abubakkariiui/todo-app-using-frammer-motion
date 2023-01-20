@@ -1,15 +1,16 @@
 import React, { useState, useContext } from "react";
 import Task from "../Task/Task";
-import { AnimatePresence } from "framer-motion";
+import DropDown from "../DropDown/DropDown";
+import { motion, AnimatePresence } from "framer-motion";
 import taskContext from "../context/TaskContext";
 import "./Tasks.css";
 const Tasks = () => {
   const [all, setAll] = useState(true);
-  const { tasks, doneTaskList } = useContext(taskContext);
+  const { tasks, doneTaskList, deleteAll } = useContext(taskContext);
   const handlechange = (e) => {
-    if (e.target.value === "all") {
+    if (e.target.dataset.catagory === "all") {
       setAll(true);
-    } else if (e.target.value === "done") {
+    } else if (e.target.dataset.catagory === "done") {
       setAll(false);
     }
   };
@@ -20,14 +21,43 @@ const Tasks = () => {
         <h2 className="tasks__title__text">All Tasks</h2>
       </div>
       <div className="tasks__sort">
-        <select name="" id="" onClick={handlechange}>
-          <option value="all">All Tasks</option>
-          <option value="done">Done Tasks</option>
-        </select>
+        <DropDown chnageCatagory={handlechange} all={all} />
+        <motion.button
+          onClick={deleteAll}
+          whileTap={{ scale: 0.9 }}
+          className="clear-all"
+        >
+          Clear All
+        </motion.button>
       </div>
       <div className="tasks__container">
         <AnimatePresence>
-          {all === true
+          {tasks.length !== 0 ? (
+            all === true ? (
+              tasks.map((task) => (
+                <Task
+                  key={task.id}
+                  id={task.id}
+                  isDone={task.isDone}
+                  topic={task.topic}
+                  content={task.content}
+                />
+              ))
+            ) : (
+              doneTaskList.map((task) => (
+                <Task
+                  key={task.id}
+                  id={task.id}
+                  isDone={task.isDone}
+                  topic={task.topic}
+                  content={task.content}
+                />
+              ))
+            )
+          ) : (
+            <h4 className="nothing">You dont have any task to do</h4>
+          )}
+          {/* {all === true
             ? tasks.map((task) => (
                 <Task
                   key={task.id}
@@ -45,7 +75,7 @@ const Tasks = () => {
                   topic={task.topic}
                   content={task.content}
                 />
-              ))}
+              ))} */}
         </AnimatePresence>
       </div>
     </div>

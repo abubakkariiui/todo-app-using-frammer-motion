@@ -16,7 +16,8 @@ const AddTask = () => {
     setText({ ...text, content: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setText({ topic: "", content: "" });
     if (text.topic.trim() !== "" && text.content.trim() !== "") {
       addTasks(text.topic, text.content);
@@ -40,11 +41,11 @@ const AddTask = () => {
           />
           <h2 className="add-task__title__text">Make New Task</h2>
         </div>
-        <div className="add-task__inputs">
+        <form onSubmit={handleSubmit} className="add-task__inputs">
           <div>
-            <p className="add-task__lether-count">{text.topic.length}/50</p>
+            <p className="add-task__lether-count">{text.topic.length}/75</p>
             <input
-              maxLength={50}
+              maxLength={75}
               value={text.topic}
               onChange={handleTopic}
               className="input add-task__inputs__name"
@@ -64,13 +65,13 @@ const AddTask = () => {
             />
           </div>
           <motion.button
-            whileTap={{scale:0.9}}
-            onClick={handleSubmit}
+            type="submit"
+            whileTap={{ scale: 0.9 }}
             className="add-task__inputs__submit"
           >
             Create New Task
           </motion.button>
-        </div>
+        </form>
       </div>
     </>
   );
