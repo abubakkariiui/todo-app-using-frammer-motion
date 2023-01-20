@@ -3,7 +3,9 @@
   background-color: white;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.158);
   padding: 20px 20px 20px 40px;
+  border-radius: 8px;
 }
+
 .task-line {
   content: "";
   width: 5px;
@@ -13,19 +15,23 @@
   border-radius: 50px;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #ff4545;
+  transition: all 200ms ease;
 }
-.task-line-done {
+.task del {
+  color: rgba(0, 0, 0, 0.486);
+}
+.done-true {
   background-color: #69ff34;
 }
+.done-false {
+  background-color: #ff4545;
+}
 .task__title {
-  font-size: 22px;
   word-wrap: break-word;
   font-size: 20px;
   font-weight: 500;
 }
 .task__content {
-  font-size: 15px;
   margin-top: 10px;
   word-wrap: break-word;
   font-size: 14px;
@@ -40,6 +46,8 @@
   cursor: pointer;
 }
 .ball {
+  cursor: pointer;
+  border: none;
   border-radius: 50px;
   width: 12px;
   height: 12px;
