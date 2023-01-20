@@ -50,7 +50,9 @@ export const TaskProvider = ({ children }) => {
   const deleteAll = () => {
     setTasks([]);
     localStorage.setItem("tasks", JSON.stringify([]));
-    if (tasks.length) {
+    if (tasks.length === 1) {
+      toast.error("Task Deleted", { autoClose: 1500 });
+    } else {
       toast.error("All task deleted", { autoClose: 1500 });
     }
   };
