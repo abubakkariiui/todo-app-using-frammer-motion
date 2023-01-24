@@ -13,7 +13,7 @@ const DropDown = ({ chnageCatagory, all }) => {
   return (
     <motion.div whileTap={{ scale: 0.9 }} className="drop-down">
       <button onClick={handleOpen} className="drop-down__change">
-        {all === true ? "All Task" : "Done Task"} <span>▼</span>
+        {all === true ? "All Tasks" : "Done Tasks"} <span>▼</span>
       </button>
       <div className={`item-container ${isOpen === true && "show"}`}>
         <div
@@ -21,14 +21,14 @@ const DropDown = ({ chnageCatagory, all }) => {
           data-catagory="all"
           className="drop-down__item"
         >
-          All Task
+          All Tasks
         </div>
         <div
           onClick={(e) => handleChnage(e)}
           data-catagory="done"
           className="drop-down__item"
         >
-          ِDone Task
+          ِDone Tasks
         </div>
       </div>
     </motion.div>
