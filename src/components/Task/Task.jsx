@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import TaskContext from "../context/TaskContext";
+import Tooltip from "../Tooltip/Tooltip";
 import "./Task.css";
 const Task = ({ isDone, topic, content, id }) => {
   const { deleteTask, doneTask, setId } = useContext(TaskContext);
@@ -29,21 +30,27 @@ const Task = ({ isDone, topic, content, id }) => {
     >
       <span className={`task-line done-${isDone}`}></span>
       <div className="task__status">
-        <motion.button
-          whileTap={{ scale: 2 }}
-          onClick={() => deleteTask(id)}
-          className="ball task__close"
-        ></motion.button>
-        <motion.button
-          whileTap={{ scale: 2 }}
-          onClick={() => setId(id)}
-          className="ball task__edit"
-        ></motion.button>
-        <motion.button
-          whileTap={{ scale: 2 }}
-          onClick={() => doneTask(id)}
-          className="ball task__done"
-        ></motion.button>
+        <Tooltip content="Delete Todo" direction="top">
+          <motion.button
+            whileTap={{ scale: 2 }}
+            onClick={() => deleteTask(id)}
+            className="ball task__close"
+          ></motion.button>
+        </Tooltip>
+        <Tooltip content="Edit Todo" direction="top">
+          <motion.button
+            whileTap={{ scale: 2 }}
+            onClick={() => setId(id)}
+            className="ball task__edit"
+          ></motion.button>
+        </Tooltip>
+        <Tooltip content="Mark Completed" direction="left">
+          <motion.button
+            whileTap={{ scale: 2 }}
+            onClick={() => doneTask(id)}
+            className="ball task__done"
+          ></motion.button>
+        </Tooltip>
       </div>
       <h4 className="task__title">
         {isDone === true ? <del>{topic}</del> : topic}
